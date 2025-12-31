@@ -30,6 +30,6 @@ jobs:
 
       - name: Run pytest
         working-directory: starter
-        env:
-          PYTHONPATH: .
-        run: python -m pytest -q
+        run: |
+          export PYTHONPATH=$PYTHONPATH:.
+          python -m pytest -v

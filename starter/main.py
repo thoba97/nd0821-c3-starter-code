@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
+from pathlib import Path
 from ml.data import process_data
 from ml.model import load_model, load_encoder, inference
 
@@ -19,10 +20,10 @@ app = FastAPI(
 )
 
 # Define paths to saved artifacts
-# Note: Ensure these paths match your actual directory structure
-model_path = "model/model.joblib"
-encoder_path = "model/encoder.joblib"
-lb_path = "model/label_binarizer.joblib"
+base_path = Path(__file__).resolve().parent
+model_path = base_path / "model" / "model.joblib"
+encoder_path = base_path / "model" / "encoder.joblib"
+lb_path = base_path / "model" / "label_binarizer.joblib"
 
 # Load model and encoders at startup
 model = load_model(model_path)
