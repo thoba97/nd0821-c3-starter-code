@@ -24,9 +24,10 @@ jobs:
           pip install -r starter/requirements.txt
 
       - name: Run pytest
+        env:
+          PYTHONPATH: ${{ github.workspace }}/starter/starter
         working-directory: starter/starter
-        run: |
-          python -m pytest -q
+        run: python -m pytest -v
 
       - name: Run flake8
         run: flake8 .
