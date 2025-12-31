@@ -26,10 +26,10 @@ jobs:
           pip install -r starter/requirements.txt
 
       - name: Run flake8
-        run: flake8 starter/starter --count --select=E9,F63,F7,F82 --show-source --statistics
+        run: flake8 starter --count --select=E9,F63,F7,F82 --show-source --statistics
 
       - name: Run pytest
-        working-directory: starter/starter
+        working-directory: starter
         env:
           PYTHONPATH: .
         run: python -m pytest -q
