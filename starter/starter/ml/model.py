@@ -1,4 +1,7 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.ensemble import RandomForestClassifier
+import joblib
+from pathlib import Path
 
 
 def train_model(X_train, y_train):
@@ -16,7 +19,9 @@ def train_model(X_train, y_train):
     model : RandomForestClassifier
         Trained machine learning model.
     """
-    pass
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)
+    return model
 
 
 def compute_model_metrics(y, preds):
@@ -55,4 +60,29 @@ def inference(model, X):
     preds : np.ndarray
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
+
+
+def save_model(model, path: str):
+    """Save trained model to disk using joblib."""
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, path)
+
+
+def load_model(path: str):
+    """Load a model saved with joblib."""
+    return joblib.load(path)
+
+
+def save_encoder(encoder, lb, encoder_path: str, lb_path: str):
+    """Save encoder and label binarizer to disk."""
+    Path(encoder_path).parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(encoder, encoder_path)
+    joblib.dump(lb, lb_path)
+
+
+def load_encoder(encoder_path: str, lb_path: str):
+    """Load encoder and label binarizer from disk."""
+    encoder = joblib.load(encoder_path)
+    lb = joblib.load(lb_path)
+    return encoder, lb
