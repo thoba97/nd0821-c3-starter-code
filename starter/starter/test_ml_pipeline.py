@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-from starter.ml.data import process_data
-from starter.ml.model import (
+from ml.data import process_data
+from ml.model import (
     train_model,
     inference,
     compute_model_metrics,
@@ -109,3 +109,34 @@ def test_save_and_load_model_and_encoders(tmp_path: Path):
     out = loaded.predict(sample)
     assert isinstance(out, np.ndarray)
     assert out.shape[0] == 2
+
+
+def test_slice_performance_writes_file_and_returns_keys(tmp_path: Path):
+    from starter.ml.model import slice_performance
+
+    df = _sample_dataframe()
+    # Train on whole small dataset
+    X, y, encoder, lb = process_data(df, categorical_features=cat_features, label="salary", training=True)
+    model = train_model(X, y)
+
+    out_file = tmp_path / "slice_output.txt"
+    results = slice_performance(
+        model=model,
+        df=df,
+        feature="education",
+        categorical_features=cat_features,
+        label="salary",
+        encoder=encoder,
+        lb=lb,
+        out_file=str(out_file),
+    )
+
+    # Expect keys for each unique education value
+    expected_keys = sorted(df["education"].unique())
+    assert set(results.keys()) == set(expected_keys)
+
+    # File should exist and contain lines
+    assert out_file.exists()
+    content = out_file.read_text(encoding="utf-8")
+    for k in expected_keys:
+        assert k in content

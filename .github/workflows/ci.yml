@@ -23,8 +23,10 @@ jobs:
           pip install pytest flake8
           pip install -r starter/requirements.txt
 
+      - name: Run pytest
+        working-directory: starter/starter
+        run: |
+          python -m pytest -q
+
       - name: Run flake8
         run: flake8 .
-
-      - name: Run pytest
-        run: pytest

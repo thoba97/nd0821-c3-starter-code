@@ -12,7 +12,13 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
 from starter.ml.data import process_data
-from starter.ml.model import train_model, compute_model_metrics, save_model, save_encoder
+from starter.ml.model import (
+    train_model,
+    compute_model_metrics,
+    save_model,
+    save_encoder,
+    slice_performance,
+)
 
 
 def main() -> None:
@@ -65,6 +71,21 @@ def main() -> None:
     print(f"Saved model to: {model_path}")
     print(f"Saved encoder to: {encoder_path}")
     print(f"Saved label binarizer to: {lb_path}")
+
+    # Compute slice performance for a categorical feature and save to file
+    slice_file = model_dir / "slice_output.txt"
+    print(f"Computing slice performance for 'education' and writing to {slice_file}")
+    slice_performance(
+        model=model,
+        df=df,
+        feature="education",
+        categorical_features=cat_features,
+        label="salary",
+        encoder=encoder,
+        lb=lb,
+        out_file=str(slice_file),
+    )
+    print(f"Slice performance written to: {slice_file}")
 
 
 if __name__ == "__main__":
