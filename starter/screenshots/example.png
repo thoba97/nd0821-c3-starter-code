@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800">
+  <rect width="1200" height="60" fill="#1DA1F2" />
+  <text x="20" y="38" font-family="DejaVu Sans, Arial" font-size="20" fill="#ffffff">Swagger UI — POST /predict example</text>
+  <text x="20" y="96" font-family="DejaVu Sans, Arial" font-size="18" fill="#000000">Example Value:</text>
+  <g font-family="DejaVu Sans, Arial" font-size="14" fill="#333333">
+    <text x="40" y="136">{</text>
+    <text x="60" y="162">"age": 39,</text>
+    <text x="60" y="180">"workclass": "State-gov",</text>
+    <text x="60" y="198">"fnlgt": 77516,</text>
+    <text x="60" y="216">"education": "Bachelors",</text>
+    <text x="60" y="234">"education-num": 13,</text>
+    <text x="60" y="252">"marital-status": "Never-married",</text>
+    <text x="60" y="270">"occupation": "Adm-clerical",</text>
+    <text x="60" y="288">"relationship": "Not-in-family",</text>
+    <text x="60" y="306">"race": "White",</text>
+    <text x="60" y="324">"sex": "Male",</text>
+    <text x="60" y="342">"capital-gain": 2174,</text>
+    <text x="60" y="360">"capital-loss": 0,</text>
+    <text x="60" y="378">"hours-per-week": 40,</text>
+    <text x="60" y="396">"native-country": "United-States"</text>
+    <text x="40" y="420">}</text>
+  </g>
+  <text x="20" y="760" font-family="DejaVu Sans, Arial" font-size="12" fill="#777777">Automatically generated example for /docs (saved as example.png)</text>
+</svg>
