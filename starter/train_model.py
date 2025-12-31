@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-from starter.ml.data import process_data
-from starter.ml.model import (
+from ml.data import process_data
+from ml.model import (
     train_model,
     compute_model_metrics,
     save_model,
